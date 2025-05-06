@@ -2,8 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import authRoutes from './routes/authRoutes.js';
 import {dbConnection} from './lib/db.js';
+import authRoutes from './routes/authRoutes.js';
+import messageRoutes from './routes/messageRoutes.js';
 
 const app= express();
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cookieParser());
 app.use(express.json());//extract json data from the request
 
 app.use('/api/auth', authRoutes);
+app.use('/api/message', messageRoutes);
 
 app.listen(port, ()=>{
     console.log('Server is running on port 5000');
