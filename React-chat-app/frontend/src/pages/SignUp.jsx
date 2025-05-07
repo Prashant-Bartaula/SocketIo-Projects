@@ -1,0 +1,69 @@
+import React, { useState } from "react";
+import { useAuthStore } from "../store/useAuthStore";
+import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+
+export default function SignUp() {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+  });
+  const { signup, isSigningUp } = useAuthStore();
+
+  const validateForm = () => {
+    if(!formData.fullName.trim()) return toast.error('Full name is required');
+    if(!formData.email.trim()) return toast.error('Email is required');
+    if(!formData.password.trim() || formData.password.length < 6) return toast.error('Password should be at least 6 characters long');
+
+    return true;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const isValid = validateForm();
+    if(isValid===true){
+      console.log('i ram running')
+      signup(formData);
+    } 
+  };
+  return (
+    <div className="min-h-screen min-w-screen flex justify-center items-center">
+      <form
+        className="border p-5
+       text-center flex flex-col gap-8"
+      >
+        <h1>Sign Up</h1>
+
+        <div className="text-start flex justify-between items-center gap-5">
+          <label htmlFor="name">Full name: </label>
+          <input type="text" name="name" id="name"
+          placeholder="e.g John Doe"
+          value={formData.fullName}
+          onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+          />
+        </div>
+        <div className="text-start flex justify-between items-center gap-5">
+          <label htmlFor="email">Email: </label>
+          <input type="email" name="email" id="email" 
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          />
+        </div>
+
+        <div className="text-start flex justify-between items-center gap-5">
+          <label htmlFor="password">Password: </label>
+          <input type="password" name="password" id="password" 
+          value={formData.password}
+          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+          />
+        </div>
+        <button onClick={(e)=>handleSubmit(e)} className="outline-none bg-purple-500 text-white w-fit mx-auto px-4 py-2 cursor-pointer rounded-2xl " disabled={isSigningUp}>
+          {isSigningUp ? "Signing Up..." : "Sign Up"}
+        </button>
+      </form>
+
+      <Toaster/>
+    </div>
+  );
+}

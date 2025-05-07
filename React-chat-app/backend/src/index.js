@@ -11,10 +11,13 @@ dotenv.config();
 
 const port=process.env.PORT||5000;
 
-app.use(cors());//cross origin resource sharing
 
 app.use(cookieParser());
 app.use(express.json());//extract json data from the request
+app.use(cors({
+    origin:'http://localhost:5173',
+    credentials:true
+}));//cross origin resource sharing
 
 app.use('/api/auth', authRoutes);
 app.use('/api/message', messageRoutes);
