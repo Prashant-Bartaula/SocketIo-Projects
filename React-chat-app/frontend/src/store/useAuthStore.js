@@ -28,5 +28,17 @@ import {toast} from 'react-hot-toast'
             toast.error(error.message);
             set({isSigningUp:false})
         }
+    },
+    login:async(data)=>{
+        set({isLoggingIn:true});
+        try {
+            const res=await axiosInstance.post('/auth/login', data);
+            toast.success('Logged in successfully');
+            set({authUser:res.data, isLoggingIn:false})
+        } catch (error) {
+            toast.error(error.message);
+            set({isLoggingIn:false})
+        }
     }
+    
  }))

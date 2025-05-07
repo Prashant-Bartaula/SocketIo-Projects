@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -58,6 +59,7 @@ export default function SignUp() {
           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           />
         </div>
+        <h2>Already have an account? <Link to='/login' className="text-blue-500">Login</Link> </h2>
         <button onClick={(e)=>handleSubmit(e)} className="outline-none bg-purple-500 text-white w-fit mx-auto px-4 py-2 cursor-pointer rounded-2xl " disabled={isSigningUp}>
           {isSigningUp ? "Signing Up..." : "Sign Up"}
         </button>
