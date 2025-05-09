@@ -14,7 +14,7 @@ export default function Login() {
 
   const validateForm = () => {
     if(!formData.email.trim()) return toast.error('Email is required');
-    if(!formData.password.trim() || formData.password.length < 6) return toast.error('Password should be at least 6 characters long');
+    if(!formData.password.trim() || formData.password.length < 6) return toast.error('Password is required');
 
     return true;
   };
@@ -51,7 +51,7 @@ export default function Login() {
           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           />
         </div>
-        <h2>Don't have an account? <Link to='/signup' className="text-blue-500">Login</Link> </h2>
+        <h2>Don't have an account? <Link to='/signup' className="text-blue-500">Sign up </Link> </h2>
         <button onClick={(e)=>handleSubmit(e)} className="outline-none bg-purple-500 text-white w-fit mx-auto px-4 py-2 cursor-pointer rounded-2xl " disabled={isLoggingIn}>
           {isLoggingIn ? "Logging In..." : "Login"}
         </button>
