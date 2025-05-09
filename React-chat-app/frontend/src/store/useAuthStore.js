@@ -7,6 +7,7 @@ import {toast} from 'react-hot-toast'
     isCheckingAuth:false,
     isSigningUp:false,
     isLoggingIn:false,
+    onlineUsers:[],
 
     checkAuth:async()=>{
         try {
